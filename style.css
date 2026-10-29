@@ -1,0 +1,395 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;500;600;700;800&family=Pacifico&display=swap');
+
+:root {
+  --pink: #ed91b1;
+  --deep-pink: #bf587f;
+  --pale-pink: #fff0f5;
+  --cream: #fffaf6;
+  --text: #73515d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  background-color: #fff0f4;
+  background-image: url("tulips.jpg");
+  background-position: center top;
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+  background-attachment: scroll;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  -webkit-tap-highlight;
+}
+
+.soft-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(255, 244, 246, 0.20);
+}
+
+.page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px 14px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+}
+
+.intro {
+  text-align: center;
+  margin: 0 0 20px;
+  animation: fadeIn .8s ease both;
+}
+
+.tiny-heart {
+  font-size: 27px;
+  color: var(--deep-pink);
+}
+
+.intro p {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2.4px;
+  margin: 6px 0;
+  color: #98566f;
+}
+
+.intro h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(25px, 7vw, 34px);
+  font-weight: 400;
+  color: var(--deep-pink);
+  margin: 4px 0;
+  text-shadow: 0 2px 0 #ffffffbd;
+}
+
+/* Card proportions follow the supplied birthday artwork */
+
+.card-scene {
+  width: min(100%, 390px);
+  aspect-ratio: 1100 / 1400;
+  perspective: 1400px;
+  position: relative;
+}
+
+
+.birthday-card {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 950ms cubic-bezier(.22,.7,.15,1);
+}
+
+.birthday-card.is-open {
+  transform: rotateY(180deg);
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 2px solid #ffffffed;
+  border-radius: 19px;
+  box-shadow: 0 12px 38px #a14c6c32;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front cover: keep the full supplied artwork */
+
+.front {
+  background: #fff1f3;
+}
+
+.cover-art {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* The button sits below the main artwork */
+
+.open-button {
+  position: absolute;
+  bottom: 3.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 19px;
+  border: 1px solid #ffffff;
+  border-radius: 40px;
+  color: white;
+  background: linear-gradient(135deg, #ee9bb8, #d95e91);
+  box-shadow: 0 5px 16px #a23d6638;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  white-space: nowrap;
+  cursor: pointer;
+  animation: gentlePulse 2.8s ease-in-out infinite;
+  z-index: 2;
+}
+
+.open-button:active {
+  animation: none;
+  transform: translateX(-50%) scale(.96);
+}
+
+/* Back of the card */
+
+.back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(ellipse at top, #ffe6ef, transparent 55%),
+    #fffaf6;
+  padding: 12px;
+}
+
+.letter {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  border: 1px solid #edbdce;
+  border-radius: 13px;
+  padding: 17px 13px 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.letter::-webkit-scrollbar {
+  display: none;
+}
+
+.letter-top {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #b35d7e;
+}
+
+.small-bouquet {
+  margin: 12px 0 6px;
+  font-size: 21px;
+  letter-spacing: 2px;
+}
+
+.letter h2 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  font-size: clamp(23px, 6.5vw, 31px);
+  color: #b8577c;
+  line-height: 1.2;
+  margin: 5px 0 0;
+}
+
+.letter h3 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(18px, 5.5vw, 25px);
+  font-weight: 400;
+  color: #dc87a6;
+  line-height: 1.3;
+  margin: 3px 0;
+  overflow-wrap: anywhere;
+}
+
+.divider {
+  font-size: 10px;
+  color: #d68aa6;
+  margin: 10px 0;
+}
+
+.message {
+  width: 100%;
+  margin: 0;
+  padding: 12px 11px;
+  border: 1px dashed #e7b1c5;
+  border-radius: 11px;
+  background: #ffffffb8;
+  font-size: 12px;
+  line-height: 1.75;
+  text-align: left;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  color: #70535e;
+}
+
+.signoff {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 13px;
+}
+
+.sender {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(17px, 4.8vw, 22px);
+  line-height: 1.4;
+  color: #c65d85;
+  overflow-wrap: anywhere;
+  margin-top: 3px;
+}
+
+.bottom-decoration {
+  font-size: 15px;
+  margin: 9px 0;
+}
+
+.back-button {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 9px 15px;
+  border: 1px solid #e9b1c6;
+  border-radius: 30px;
+  background: #fff0f5;
+  color: #a95476;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.back-button:active {
+  transform: scale(.97);
+}
+
+/* A few small floating hearts only */
+
+.heart-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -30px;
+  color: #e78caf;
+  opacity: 0;
+  animation: heartRise 4.5s ease-out forwards;
+  text-shadow: 0 2px 5px #c35e8620;
+}
+
+.footer {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  text-align: center;
+  color: #95556e;
+  font-size: 13px;
+  margin-top: 19px;
+  padding: 0 8px;
+  animation: fadeIn 1.2s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { box-shadow: 0 5px 16px #a23d6638; }
+  50% { box-shadow: 0 5px 22px #a23d665b; }
+}
+
+@keyframes heartRise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(.7) rotate(-8deg);
+  }
+  15% {
+    opacity: .7;
+  }
+  80% {
+    opacity: .55;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-65vh) scale(1.1) rotate(15deg);
+  }
+}
+
+/* Smaller phones */
+
+@media (max-width: 360px) {
+  .page {
+    padding: 18px 10px;
+  }
+
+  .intro {
+    margin-bottom: 15px;
+  }
+
+  .back {
+    padding: 8px;
+  }
+
+  .letter {
+    padding: 12px 9px 10px;
+  }
+
+  .message {
+    font-size: 11px;
+    line-height: 1.6;
+    padding: 9px;
+  }
+
+  .small-bouquet {
+    margin: 7px 0 3px;
+  }
+
+  .divider {
+    margin: 6px 0;
+  }
+
+  .signoff {
+    margin-top: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+}
